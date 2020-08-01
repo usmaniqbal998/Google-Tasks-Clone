@@ -1,0 +1,42 @@
+type Query {
+  all_task_lists(userid: String!): [TaskList!]!
+  task(taskid: String!): Task!
+  user(uid: String): User!
+}
+
+type TaskList {
+  id: ID!
+  task_list_title: String!
+  tasks: [Task!]!
+  # Date:_____ date support to be added
+}
+
+type Mutation {
+  create_task_list(title: String!): TaskList!
+  create_task(
+    title: String!
+    task_list_id: String!
+    task_title: String!
+    task_detail: String!
+  ): Task!
+  create_user(name: String!, email: String!): User!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  task_lists: [TaskList!]!
+}
+
+type Task {
+  id: ID
+  task_list: TaskList!
+  task_title: String!
+  task_details: String!
+  completion_status: Boolean!
+  user: User!
+  # Date:_____ date support to be added
+  # Due_Date:_____ date support to be added
+  # reminder_Date:_____ date support to be added
+}

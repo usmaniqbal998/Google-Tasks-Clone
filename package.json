@@ -1,0 +1,24 @@
+{
+  "name": "tasker-clone",
+  "version": "1.0.0",
+  "description": "Google Tasker Clone . This project will serve as GraphQl Api for it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js --ext .js,.graphql --exec babel-node"
+  },
+  "author": "Muhammad Usman",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^8.2.0",
+    "graphql-yoga": "^1.18.3",
+    "mongoose": "^5.9.27",
+    "uuidv4": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
