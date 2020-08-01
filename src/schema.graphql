@@ -8,6 +8,7 @@ type TaskList {
   id: ID!
   task_list_title: String!
   tasks: [Task!]!
+  user: User!
   # Date:_____ date support to be added
 }
 
