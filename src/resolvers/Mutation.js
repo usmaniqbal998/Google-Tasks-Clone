@@ -1,4 +1,5 @@
 import { findById } from "../models/user_model";
+import catchAsync from "../util/catchAsync";
 
 const userModel = require("../models/user_model");
 const tasksListModel = require("../models/task_list_model");
@@ -13,30 +14,26 @@ const Mutation = {
       return error;
     }
   },
-  create_task_list: async (parent, { title, user }, ctx, info) => {
-    try {
-      const selected_user = await userModel.findById(user);
-      if (!selected_user) {
-        return new Error("User Not found", 404);
-      }
-      const tasklist = await tasksListModel.create({
-        task_list_title: title,
-        user: selected_user._id,
-      });
-      selected_user.task_lists.push(tasklist._id);
-      await selected_user.save();
-      return tasklist;
-    } catch (error) {
-      return error;
+  create_task_list: catchAsync(async (parent, { title, user }, ctx, info) => {
+    const selected_user = await userModel.findById(user);
+    if (!selected_user) {
+      return new Error("User Not found", 404);
     }
-  },
-  create_task: async (
-    parent,
-    { task_list_id, task_title, task_detail, uid },
-    ctx,
-    info
-  ) => {
-    try {
+    const tasklist = await tasksListModel.create({
+      task_list_title: title,
+      user: selected_user._id,
+    });
+    selected_user.task_lists.push(tasklist._id);
+    await selected_user.save();
+    return tasklist;
+  }),
+  create_task: catchAsync(
+    async (
+      parent,
+      { task_list_id, task_title, task_detail, uid },
+      ctx,
+      info
+    ) => {
       const TaskList = await tasksListModel.findById(task_list_id);
       const user = await userModel.findById(uid);
       if (!user || !TaskList) {
@@ -54,10 +51,8 @@ const Mutation = {
       await TaskList.save();
 
       return task;
-    } catch (error) {
-      return error;
     }
-  },
+  ),
 };
 
 export default Mutation;
