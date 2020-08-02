@@ -7,6 +7,7 @@ import Query from "./src/resolvers/Query";
 import TaskList from "./src/resolvers/TaskLists";
 import Task from "./src/resolvers/Tasks";
 import { formatError } from "apollo-errors";
+import logInput from "./src/middleware/testmiddleware";
 
 dotenv.config({ path: "./config.env" });
 const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PASS);
@@ -36,6 +37,7 @@ const server = new GraphQLServer({
     TaskList,
     Task,
   },
+  middlewares: [logInput],
 });
 
 server.start(options, () => {

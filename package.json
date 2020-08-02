@@ -15,6 +15,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "dotenv": "^8.2.0",
+    "graphql-middleware": "^4.0.2",
     "graphql-yoga": "^1.18.3",
     "mongoose": "^5.9.27",
     "uuidv4": "^6.2.0"
