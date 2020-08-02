@@ -6,6 +6,7 @@ import User from "./src/resolvers/User";
 import Query from "./src/resolvers/Query";
 import TaskList from "./src/resolvers/TaskLists";
 import Task from "./src/resolvers/Tasks";
+import { formatError } from "apollo-errors";
 
 dotenv.config({ path: "./config.env" });
 const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PASS);
@@ -22,6 +23,10 @@ mongoose
     console.log(err);
   });
 
+const options = {
+  formatError,
+};
+
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers: {
@@ -33,6 +38,6 @@ const server = new GraphQLServer({
   },
 });
 
-server.start(() => {
+server.start(options, () => {
   console.log("The server is up");
 });

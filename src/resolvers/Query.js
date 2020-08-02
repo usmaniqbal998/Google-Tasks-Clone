@@ -1,6 +1,7 @@
-import { findById } from "../models/user_model";
 import tasksModel from "../models/tasks_model";
 import catchAsync from "../util/catchAsync";
+
+import { invalidUserorTaskList } from "../util/errors";
 
 const userModel = require("../models/user_model");
 const tasksListModel = require("../models/task_list_model");

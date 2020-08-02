@@ -1,5 +1,6 @@
 import { findById } from "../models/user_model";
 import catchAsync from "../util/catchAsync";
+import { invalidUserorTaskList } from "../util/errors";
 
 const userModel = require("../models/user_model");
 const tasksListModel = require("../models/task_list_model");
@@ -17,7 +18,7 @@ const Mutation = {
   create_task_list: catchAsync(async (parent, { title, user }, ctx, info) => {
     const selected_user = await userModel.findById(user);
     if (!selected_user) {
-      return new Error("User Not found", 404);
+      throw new invalidUserorTaskList();
     }
     const tasklist = await tasksListModel.create({
       task_list_title: title,
@@ -37,7 +38,7 @@ const Mutation = {
       const TaskList = await tasksListModel.findById(task_list_id);
       const user = await userModel.findById(uid);
       if (!user || !TaskList) {
-        return new Error("Invalid User or tasklist specified", 404);
+        throw new invalidUserorTaskList();
       }
 
       const task = await tasksModel.create({
