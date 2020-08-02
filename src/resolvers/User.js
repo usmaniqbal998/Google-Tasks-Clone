@@ -1,4 +1,5 @@
 const tasksListModel = require("../models/task_list_model");
+import catchAsync from "../util/catchAsync";
 
 const User = {
   task_lists: catchAsync(async (parent, args, ctx, info) => {

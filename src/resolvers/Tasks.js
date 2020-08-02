@@ -1,6 +1,6 @@
 import userModel from "../models/user_model";
-import catchAsync from "../util/catchAsync";
 const tasksListModel = require("../models/task_list_model");
+import catchAsync from "../util/catchAsync";
 
 const Task = {
   task_list: catchAsync(async (parent, args, ctx, info) => {
