@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, "User email is required"],
+    unique: true,
   },
   task_lists: [{ type: mongoose.Schema.ObjectId, ref: "TaskLists" }],
 });

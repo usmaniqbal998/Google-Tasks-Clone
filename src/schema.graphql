@@ -1,7 +1,8 @@
 type Query {
-  all_task_lists(userid: String!): [TaskList!]!
+  all_task_lists(uid: String!): [TaskList!]!
   task(taskid: String!): Task!
   user(uid: String): User!
+  tasks_by_list(tasklist_id: String!): [Task!]!
 }
 
 type TaskList {
@@ -13,12 +14,12 @@ type TaskList {
 }
 
 type Mutation {
-  create_task_list(title: String!): TaskList!
+  create_task_list(title: String!, user: String!): TaskList!
   create_task(
-    title: String!
     task_list_id: String!
     task_title: String!
     task_detail: String!
+    uid: String!
   ): Task!
   create_user(name: String!, email: String!): User!
 }
@@ -28,6 +29,7 @@ type User {
   name: String!
   email: String!
   task_lists: [TaskList!]!
+  #Date Created to be edited
 }
 
 type Task {

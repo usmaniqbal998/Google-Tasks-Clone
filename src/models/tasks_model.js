@@ -15,6 +15,7 @@ const taskSchema = new mongoose.Schema({
   },
   completion_status: {
     type: Boolean,
+    default: false,
   },
   user: {
     type: mongoose.Schema.ObjectId,
